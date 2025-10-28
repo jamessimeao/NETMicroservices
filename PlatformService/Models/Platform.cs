@@ -1,0 +1,17 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PlatformService.Models
+{
+    internal class Platform
+    {
+        [Key]
+        [Required]
+        public required int Id { get; set; }
+        [Required]
+        public required string Name { get; set; }
+        [Required]
+        public required string Publisher { get; set; }
+        [Required]
+        public required string Cost { get; set; }
+    }
+}
