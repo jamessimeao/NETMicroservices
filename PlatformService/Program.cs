@@ -19,6 +19,8 @@ builder.Services.AddDbContext<AppDbContext>(
     (DbContextOptionsBuilder options) => options.UseSqlServer(connectionString)
     );
 
+builder.Services.AddScoped<IPlatformRepo,PlatformRepo>();
+
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
