@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PlatformService.Data;
+using PlatformService.Profiles;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
      opt.UseInMemoryDatabase("InMem"));
 
 builder.Services.AddScoped<IPlatformRepo,PlatformRepo>();
+builder.Services.AddAutoMapper(cfg => { }, typeof(PlatformsProfile));
 
 WebApplication app = builder.Build();
 
