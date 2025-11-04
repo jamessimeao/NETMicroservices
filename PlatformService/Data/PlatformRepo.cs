@@ -4,6 +4,7 @@ using PlatformService.Models;
 
 namespace PlatformService.Data
 {
+    // Class for accessing the database
     public class PlatformRepo : IPlatformRepo
     {
         private readonly AppDbContext _dbContext;
