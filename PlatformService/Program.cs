@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+/*
 string? connectionString = builder.Configuration.GetConnectionString("Default");
 if(connectionString == null)
 {
@@ -18,6 +19,11 @@ if(connectionString == null)
 builder.Services.AddDbContext<AppDbContext>(
     (DbContextOptionsBuilder options) => options.UseSqlServer(connectionString)
     );
+*/
+
+Console.WriteLine("--> Using InMem Db");
+builder.Services.AddDbContext<AppDbContext>(opt =>
+     opt.UseInMemoryDatabase("InMem"));
 
 builder.Services.AddScoped<IPlatformRepo,PlatformRepo>();
 
