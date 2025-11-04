@@ -43,4 +43,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+DatabasePreparation.Population(app);
+
 app.Run();
