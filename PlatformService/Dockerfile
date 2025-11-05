@@ -30,17 +30,36 @@
 #ENTRYPOINT ["dotnet", "PlatformService.dll"]
 
 
-# From .NET Microservices course
+# From .NET Microservices course.
+# Start from the .NET sdk, which is needed for building
+# the project.
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-env
+# Set the working directory as /app in the container
 WORKDIR /app
 
+# Copy the project file to /app
 COPY *.csproj ./
+# Run dotnet restore, which restores the dependencies and tools
+# for the project, such as NuGet packages
 RUN dotnet restore
 
+# Copy the project folder to /app
 COPY . ./
+# Publish the project inside the container, in /app/out.
+# This compiles the code for production.
 RUN dotnet publish -c Release -o out
 
+# Now that the project is already built, we extract from it
+# what we need to just run the program.
+# We don't need the entire sdk anymore, so start from the
+# runtime for ASP.NET.
 FROM mcr.microsoft.com/dotnet/aspnet:10.0
+# Set again the working directory as /app
 WORKDIR /app
+# Copy from build-env, from the /app/out directory,
+# the published project and write it in /app of the final
+# container.
 COPY --from=build-env /app/out .
+# Configure what the final container will do when it runs.
+# It will use dotnet to run the PlatformService.dll.
 ENTRYPOINT ["dotnet", "PlatformService.dll"]
