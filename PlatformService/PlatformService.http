@@ -18,3 +18,26 @@ Content-Type: application/json
   "Publisher": "publisher",
   "Cost": "cost"
 }
+
+### For docker
+
+@AddressForDocker = http://localhost:80
+
+GET {{AddressForDocker}}/api/Platforms/
+Accept: application/json
+
+###
+
+GET {{AddressForDocker}}/api/Platforms/4
+Accept: application/json
+
+###
+
+POST {{AddressForDocker}}/api/Platforms/
+Content-Type: application/json
+
+{
+  "Name": "name",
+  "Publisher": "publisher",
+  "Cost": "cost"
+}
